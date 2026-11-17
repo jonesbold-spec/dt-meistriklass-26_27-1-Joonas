@@ -69,25 +69,29 @@ body {
 }
 
 .clock {
-  position: relative;
   flex: 1;
+  min-height: 0;
 
   display: flex;
-  flex-flow: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.clock__unit {
-  padding: 0.25rem;
-
-  background-color: lightpink;
-
-  transition: flex 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+#clock {
+  height: 100%;
+  max-height: calc(100dvh - 3rem);
+  aspect-ratio: 1;
 }
 
-.clock__unit:nth-child(2) {
-  background-color: lightgreen;
+.ring {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.521);
+  stroke-width: 1;
 }
 
-.clock__unit:nth-child(3) {
-  background-color: beige;
+#triangle {
+  fill: rgba(255, 0, 0, 0);
+  stroke: red;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
 }

@@ -28,9 +28,13 @@
 
         <!-- Kell -->
         <div class="clock">
-          <p id="hour" class="clock__unit"></p>
-          <p id="minute" class="clock__unit"></p>
-          <p id="second" class="clock__unit"></p>
+          <svg id="clock" viewBox="0 0 400 400">
+            <circle class="ring" cx="200" cy="200" r="60" />
+            <circle class="ring" cx="200" cy="200" r="120" />
+            <circle class="ring" cx="200" cy="200" r="180" />
+
+            <polygon id="triangle" />
+          </svg>
         </div>
       </main>
     </div>

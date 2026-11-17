@@ -3,9 +3,6 @@ function initPage() {
   const day = document.getElementById("day");
   const month = document.getElementById("month");
   const year = document.getElementById("year");
-  const hour = document.getElementById("hour");
-  const minute = document.getElementById("minute");
-  const second = document.getElementById("second");
 
   function setDate(time) {
     weekday.innerText = time.weekdayName;
@@ -18,14 +15,36 @@ function initPage() {
     setDate(time);
   });
 
-  function setClock(time) {
-    hour.innerText = pad(time.hour);
-    minute.innerText = pad(time.minute);
-    second.innerText = pad(time.second);
+  const CENTER = 200;
+  const RADII = { hour: 60, minute: 120, second: 180 };
 
-    hour.style.flex = time.hoursProgress;
-    minute.style.flex = time.minutesProgress;
-    second.style.flex = time.secondsProgress;
+  function pointOnCircle(radius, progress) {
+    const angle = progress * Math.PI * 2 - Math.PI / 2; // 0 = kell 12
+    return {
+      x: CENTER + radius * Math.cos(angle),
+      y: CENTER + radius * Math.sin(angle),
+    };
+  }
+
+  function setClock(time) {
+    // TIME objekti progress-väärtused (0–1)
+    const progress = {
+      second: time.secondsProgress,
+      minute: time.minutesProgress,
+      hour: (time.hoursProgress * 2) % 1, // 12-tunnine ring
+    };
+
+    const points = {};
+    for (const name in progress) {
+      points[name] = pointOnCircle(RADII[name], progress[name]);
+    }
+
+    document.getElementById("triangle").setAttribute(
+      "points",
+      Object.values(points)
+        .map((p) => `${p.x},${p.y}`)
+        .join(" "),
+    );
   }
 
   setClock(TIME.now());
